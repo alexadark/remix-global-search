@@ -13,6 +13,7 @@ import Feature from "./components/Feature";
 import Grid from "./components/Grid";
 import Page from "./components/Page";
 import Teaser from "./components/Teaser";
+import Layout from "./components/Layout";
 import styles from "./styles/app.css";
 
 const isServer = typeof window === "undefined";
@@ -57,7 +58,9 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Outlet />
+        <Layout>
+          <Outlet />
+        </Layout>
         <script
           dangerouslySetInnerHTML={{
             __html: `window.env = ${JSON.stringify(env)}`,
