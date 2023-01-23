@@ -14,6 +14,7 @@ import Grid from "./components/Grid";
 import Page from "./components/Page";
 import Teaser from "./components/Teaser";
 import Layout from "./components/Layout";
+import Post from "./components/Post";
 import styles from "./styles/app.css";
 
 const isServer = typeof window === "undefined";
@@ -28,6 +29,7 @@ const components = {
   grid: Grid,
   teaser: Teaser,
   page: Page,
+  post: Post,
 };
 storyblokInit({
   accessToken,
