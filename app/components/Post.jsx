@@ -4,12 +4,16 @@ import { render } from "storyblok-rich-text-react-renderer";
 const Post = ({ blok }) => {
   const { headline, text, _uid, image } = blok;
   return (
-    <article {...storyblokEditable(blok)} key={_uid}>
-      <h1 className="mb-3 text-2xl font-bold text-teal-500 uppercase ">
+    <article
+      {...storyblokEditable(blok)}
+      key={_uid}
+      className="max-w-2xl mx-auto"
+    >
+      <h1 className="mb-10 text-4xl font-bold text-center text-teal-500 uppercase ">
         {headline}
       </h1>
       <img
-        className="mb-4 shadow-xl rounded-xl"
+        className="mb-10 shadow-xl rounded-xl"
         src={`${image.filename}/m/600x300`}
         alt=""
       />

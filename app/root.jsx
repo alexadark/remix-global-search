@@ -15,6 +15,7 @@ import Page from "./components/Page";
 import Teaser from "./components/Teaser";
 import Layout from "./components/Layout";
 import Post from "./components/Post";
+import AllPosts from "./components/AllPosts";
 import styles from "./styles/app.css";
 
 const isServer = typeof window === "undefined";
@@ -30,6 +31,7 @@ const components = {
   teaser: Teaser,
   page: Page,
   post: Post,
+  "all-posts": AllPosts,
 };
 storyblokInit({
   accessToken,
