@@ -1,4 +1,5 @@
 import { NavLink, Link } from "@remix-run/react";
+import Search from "./search";
 
 const Header = () => {
   return (
@@ -7,10 +8,13 @@ const Header = () => {
         <h1 className="text-3xl font-bold uppercase">
           <Link to="/">My Blog</Link>
         </h1>
-        <nav className="flex gap-5 text-xl [&>a:hover]:underline">
-          <NavLink to="/about">About</NavLink>
-          <NavLink to="/blog">Blog</NavLink>
-        </nav>
+        <div className="flex justify-between gap-5">
+          <nav className="flex gap-5 text-xl [&>a:hover]:underline">
+            <NavLink to="/about">About</NavLink>
+            <NavLink to="/blog">Blog</NavLink>
+          </nav>
+          <Search />
+        </div>
       </div>
     </div>
   );

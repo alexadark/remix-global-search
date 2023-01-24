@@ -9,15 +9,14 @@ import {
   useLoaderData,
 } from "@remix-run/react";
 import { storyblokInit, apiPlugin } from "@storyblok/react";
-import Feature from "./components/Feature";
-import Grid from "./components/Grid";
+
 import Page from "./components/Page";
-import Teaser from "./components/Teaser";
+
 import Layout from "./components/Layout";
 import Post from "./components/Post";
 import AllPosts from "./components/AllPosts";
+import PageContent from "./components/PageContent";
 import styles from "./styles/app.css";
-
 const isServer = typeof window === "undefined";
 
 //We need to check if we are on the server or client to get the correct env variable
@@ -26,12 +25,10 @@ const accessToken = isServer
   : window.env.STORYBLOK_PREVIEW_TOKEN;
 
 const components = {
-  feature: Feature,
-  grid: Grid,
-  teaser: Teaser,
   page: Page,
   post: Post,
   "all-posts": AllPosts,
+  "page-content": PageContent,
 };
 storyblokInit({
   accessToken,
