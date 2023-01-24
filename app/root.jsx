@@ -1,4 +1,4 @@
-import { json } from "@remix-run/node";
+import { json, redirect } from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -42,6 +42,11 @@ export const loader = async () => {
       STORYBLOK_PREVIEW_TOKEN: process.env.STORYBLOK_PREVIEW_TOKEN,
     },
   });
+};
+
+export const action = async ({ request }) => {
+  const body = await request.formData();
+  return redirect(`/search-results?query=${body.get("query")}`);
 };
 
 export const meta = () => ({
