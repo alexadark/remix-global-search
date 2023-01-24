@@ -1,9 +1,8 @@
-import { Form } from "@remix-run/react";
 import clsx from "clsx";
 
 const SearchForm = () => {
   return (
-    <Form method="post" className="flex justify-between md:w-[90%]">
+    <form className="flex justify-between md:w-[90%]">
       <input
         type="text"
         name="query"
@@ -17,7 +16,7 @@ const SearchForm = () => {
           "focus:outline-none focus:ring-transparent focus:placeholder-transparent  placeholder-teal-200"
         )}
       />
-    </Form>
+    </form>
   );
 };
 
