@@ -1,9 +1,13 @@
 import { Form } from "@remix-run/react";
 import clsx from "clsx";
 
-const SearchForm = () => {
+const SearchForm = ({ setOpen }) => {
   return (
-    <Form method="post" className="flex justify-between md:w-[90%]">
+    <Form
+      method="post"
+      className="flex justify-between md:w-[90%]"
+      onSubmit={() => setOpen(false)}
+    >
       <input
         type="text"
         name="query"
