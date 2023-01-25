@@ -75,7 +75,7 @@ const Search = () => {
                     />
                   </button>
                   <div>
-                    <SearchForm />
+                    <SearchForm setOpen={setOpen} />
                   </div>
                 </div>
               </Transition.Child>
