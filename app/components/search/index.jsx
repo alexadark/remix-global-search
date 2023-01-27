@@ -7,9 +7,15 @@ import clsx from "clsx";
 
 const Search = () => {
   const [open, setOpen] = useState(false);
+  const [openOverlay, setOpenOverlay] = useState(false);
 
   return (
     <>
+      {openOverlay && (
+        <div className="absolute inset-0 flex items-center justify-center w-full h-full bg-teal-900 overlay opacity-80">
+          <h3>Searching...</h3>
+        </div>
+      )}
       <button
         aria-label="search"
         onClick={() => setOpen(true)}
@@ -75,7 +81,11 @@ const Search = () => {
                     />
                   </button>
                   <div>
-                    <SearchForm setOpen={setOpen} />
+                    <SearchForm
+                      setOpen={setOpen}
+                      open={open}
+                      setOpenOverlay={setOpenOverlay}
+                    />
                   </div>
                 </div>
               </Transition.Child>
