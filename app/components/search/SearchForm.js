@@ -1,14 +1,9 @@
 import { useEffect, useRef } from "react";
-import {
-  Form,
-  useTransition,
-  useSearchParams,
-  useLocation,
-} from "@remix-run/react";
+import { Form, useTransition, useSearchParams } from "@remix-run/react";
 import { BiSearch as SearchIcon } from "react-icons/bi";
 import clsx from "clsx";
 
-const SearchForm = ({ setOpen, setOpenOverlay }) => {
+const SearchForm = ({ setOpen, setOpenOverlay, openOverlay }) => {
   const [params] = useSearchParams();
   const query = params.get("query");
 
@@ -16,9 +11,6 @@ const SearchForm = ({ setOpen, setOpenOverlay }) => {
   let inputRef = useRef();
 
   let transition = useTransition();
-
-  let location = useLocation();
-  let isRedirect = location.state?._isRedirect;
 
   let isSearching =
     transition.state === "submitting" &&
@@ -29,8 +21,8 @@ const SearchForm = ({ setOpen, setOpenOverlay }) => {
     isSearching,
     "query",
     query,
-    "isRedirect",
-    isRedirect
+    "openOverlay",
+    openOverlay
   );
   const close = () => {
     setOpen(false);
@@ -41,18 +33,16 @@ const SearchForm = ({ setOpen, setOpenOverlay }) => {
   }, []);
 
   useEffect(() => {
-    if (isRedirect) {
+    if (query?.length > 0) {
       setOpenOverlay(false);
     }
-  }, [setOpenOverlay, isRedirect]);
+  }, [setOpenOverlay, query]);
 
   useEffect(() => {
     if (isSearching) {
       setOpenOverlay(true);
-    } else {
-      setOpenOverlay(false);
     }
-  }, [isSearching, setOpenOverlay, isRedirect]);
+  }, [isSearching, setOpenOverlay]);
 
   return (
     <Form
@@ -63,8 +53,8 @@ const SearchForm = ({ setOpen, setOpenOverlay }) => {
     >
       <input
         ref={inputRef}
-        autoFocus
         type="text"
+        minLength="3"
         name="query"
         placeholder="Search..."
         className={clsx(

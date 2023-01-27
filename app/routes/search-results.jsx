@@ -34,7 +34,6 @@ const SearchResults = () => {
   const { stories } = useLoaderData();
   const pagesResults = stories.filter((s) => s.content.component === "page");
   const postsResults = stories.filter((s) => s.content.component === "post");
-  console.log(stories);
   if (stories.length === 0) return <h1>No results found</h1>;
   return (
     <>

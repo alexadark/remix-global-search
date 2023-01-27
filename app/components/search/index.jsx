@@ -83,7 +83,7 @@ const Search = () => {
                   <div>
                     <SearchForm
                       setOpen={setOpen}
-                      open={open}
+                      openOverlay={openOverlay}
                       setOpenOverlay={setOpenOverlay}
                     />
                   </div>
