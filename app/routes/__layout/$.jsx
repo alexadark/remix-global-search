@@ -20,13 +20,13 @@ const PageRoute = () => {
 
 export default PageRoute;
 
-export const loader = async ({ params }) => {
-  let slug = params["*"] ?? "home";
+// export const loader = async ({ params }) => {
+//   let slug = params["*"] ?? "home";
 
-  let sbParams = {
-    version: "draft",
-  };
+//   let sbParams = {
+//     version: "draft",
+//   };
 
-  let { data } = await getStoryblokApi().get(`cdn/stories/${slug}`, sbParams);
-  return json(data?.story);
-};
+//   let { data } = await getStoryblokApi().get(`cdn/stories/${slug}`, sbParams);
+//   return json(data?.story);
+// };

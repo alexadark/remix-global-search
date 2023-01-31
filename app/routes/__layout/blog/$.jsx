@@ -4,7 +4,7 @@ import {
   getStoryblokApi,
 } from "@storyblok/react";
 import { json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { useLoaderData, useMatches } from "@remix-run/react";
 
 export const loader = async ({ params }) => {
   const slug = params["*"] ?? "home";
@@ -22,6 +22,7 @@ export const loader = async ({ params }) => {
 
 const BlogRoute = () => {
   const data = useLoaderData();
+  console.log("data", data, useMatches());
   const story = useStoryblokState(data.story);
   return <StoryblokComponent blok={story.content} />;
 };
