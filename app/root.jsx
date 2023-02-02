@@ -64,9 +64,9 @@ export default function App() {
         <Links />
       </head>
       <body>
-        {/* <Layout> */}
-        <Outlet />
-        {/* </Layout> */}
+        <Layout>
+          <Outlet />
+        </Layout>
         <script
           dangerouslySetInnerHTML={{
             __html: `window.env = ${JSON.stringify(env)}`,
