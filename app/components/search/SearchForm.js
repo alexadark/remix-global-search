@@ -1,60 +1,35 @@
 import { useEffect, useRef } from "react";
-import { Form, useTransition, useSearchParams } from "@remix-run/react";
-import { BiSearch as SearchIcon } from "react-icons/bi";
+import { Form, useTransition } from "@remix-run/react";
 import clsx from "clsx";
 
-const SearchForm = ({ setOpen, setOpenOverlay, openOverlay }) => {
-  const [params] = useSearchParams();
-  const query = params.get("query");
-
-  let formRef = useRef();
+const SearchForm = ({ setOpen, setOpenOverlay }) => {
   let inputRef = useRef();
 
   let transition = useTransition();
 
-  let isSearching =
-    transition.state === "submitting" &&
-    transition.submission.formData.get("_action") === "search";
+  let isSearching = transition.state !== "idle";
 
-  console.log(
-    "isSearching",
-    isSearching,
-    "query",
-    query,
-    "openOverlay",
-    openOverlay
-  );
-  const close = () => {
-    setOpen(false);
-  };
+  console.log("isSearching", isSearching, "state", transition.state);
 
   useEffect(() => {
     inputRef.current.focus();
   }, []);
 
   useEffect(() => {
-    if (query?.length > 0) {
-      setOpenOverlay(false);
-    }
-  }, [setOpenOverlay, query]);
-
-  useEffect(() => {
     if (isSearching) {
       setOpenOverlay(true);
+      setOpen(false);
+    } else {
+      setOpenOverlay(false);
     }
-  }, [isSearching, setOpenOverlay]);
+  }, [isSearching, setOpenOverlay, setOpen]);
 
   return (
-    <Form
-      ref={formRef}
-      method="post"
-      className="flex justify-between md:w-[90%] relative"
-      onSubmit={close}
-    >
+    <Form method="post" className="flex justify-between md:w-[90%] relative">
       <input
         ref={inputRef}
         type="text"
-        minLength="3"
+        minLength={3}
         name="query"
         placeholder="Search..."
         className={clsx(
@@ -66,18 +41,6 @@ const SearchForm = ({ setOpen, setOpenOverlay, openOverlay }) => {
           "focus:outline-none focus:ring-transparent  placeholder-teal-200"
         )}
       />
-      <button
-        type="submit"
-        name="_action"
-        value="search"
-        className="absolute text-teal-200 right-5 top-3"
-      >
-        {isSearching ? (
-          "Searching..."
-        ) : (
-          <SearchIcon className="text-xl text-teal-200" />
-        )}
-      </button>
     </Form>
   );
 };
