@@ -7,7 +7,7 @@ const Post = ({ blok }) => {
     <article
       {...storyblokEditable(blok)}
       key={_uid}
-      className="max-w-2xl mx-auto"
+      className="max-w-2xl px-5 mx-auto"
     >
       <h1 className="mb-10 text-4xl font-bold text-center text-teal-500 uppercase ">
         {headline}

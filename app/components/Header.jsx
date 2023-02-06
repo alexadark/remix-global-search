@@ -4,7 +4,7 @@ import Search from "./search";
 const Header = () => {
   return (
     <div className="mb-10 text-white bg-teal-500 shadow-md ">
-      <div className="container flex justify-between py-5 mx-auto ">
+      <div className="container flex justify-between px-5 py-5 mx-auto ">
         <h1 className="mb-0 text-3xl font-bold text-white uppercase">
           <Link to="/">My Blog</Link>
         </h1>
