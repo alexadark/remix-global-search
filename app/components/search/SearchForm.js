@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { Form, useTransition, useSearchParams } from "@remix-run/react";
+import { Form, useTransition } from "@remix-run/react";
 import clsx from "clsx";
 
 const SearchForm = ({ setOpen, setOpenOverlay }) => {
@@ -8,10 +8,6 @@ const SearchForm = ({ setOpen, setOpenOverlay }) => {
   let transition = useTransition();
 
   let isSearching = transition.state !== "idle";
-
-  console.log("isSearching", isSearching, "state", transition.state);
-  const [params] = useSearchParams();
-  const query = params.get("query");
 
   useEffect(() => {
     inputRef.current.focus();
@@ -33,7 +29,6 @@ const SearchForm = ({ setOpen, setOpenOverlay }) => {
         type="text"
         minLength={3}
         name="query"
-        value={query || ""}
         placeholder="Search..."
         className={clsx(
           "w-full h-12",
