@@ -30,6 +30,7 @@ export const loader = async ({ request }) => {
   });
   return { stories: data.stories };
 };
+
 const SearchResults = () => {
   const { stories } = useLoaderData();
   const pagesResults = stories.filter((s) => s.content.component === "page");
