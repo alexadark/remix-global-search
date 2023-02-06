@@ -9,7 +9,7 @@ const AllPosts = ({ blok }) => {
       <h1 className="mb-10 text-4xl font-bold text-center text-teal-500 uppercase">
         {blok.headline}
       </h1>
-      <div className="grid grid-cols-3">
+      <div className="container grid-cols-3 gap-5 px-6 mx-auto lg:grid">
         {posts?.map((p) => {
           const post = p.content;
           return (
@@ -18,7 +18,9 @@ const AllPosts = ({ blok }) => {
                 <h2 className="mb-5 text-xl font-bold text-center uppercase hover:text-teal-500">
                   {post.headline}
                 </h2>
-                <img src={`${post.image?.filename}/m/400x200`} alt="" />
+                <div className="flex justify-center mb-10">
+                  <img src={`${post.image?.filename}/m/400x200`} alt="" />
+                </div>
               </Link>
               <p>{post.teaser}</p>
             </article>
