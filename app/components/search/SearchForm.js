@@ -7,21 +7,21 @@ const SearchForm = ({ setOpen, setOpenOverlay }) => {
 
   let transition = useTransition();
 
+  let isSearching = transition.state !== "idle";
   console.log("state", transition.state);
-  const state = transition.state;
 
   useEffect(() => {
     inputRef.current.focus();
   }, []);
 
   useEffect(() => {
-    if (state === "submitting") {
+    if (isSearching) {
       setOpenOverlay(true);
       setOpen(false);
     } else {
       setOpenOverlay(false);
     }
-  }, [state, setOpenOverlay, setOpen]);
+  }, [isSearching, setOpenOverlay, setOpen]);
 
   return (
     <Form method="post" className="flex justify-between md:w-[90%] relative">
