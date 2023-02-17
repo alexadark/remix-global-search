@@ -8,6 +8,7 @@ const SearchForm = ({ setOpen, setOpenOverlay }) => {
   let transition = useTransition();
 
   let isSearching = transition.state !== "idle";
+  console.log("state", transition.state);
 
   useEffect(() => {
     inputRef.current.focus();
