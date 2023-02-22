@@ -1,30 +1,30 @@
 import { useEffect, useRef } from "react";
-import { Form, useTransition } from "@remix-run/react";
+import { useFetcher } from "@remix-run/react";
 import clsx from "clsx";
 
 const SearchForm = ({ setOpen, setOpenOverlay }) => {
   let inputRef = useRef();
-
-  let transition = useTransition();
-
-  let isSearching = transition.state !== "idle";
-  console.log("state", transition.state);
-
+  const fetcher = useFetcher();
   useEffect(() => {
     inputRef.current.focus();
   }, []);
 
   useEffect(() => {
-    if (isSearching) {
+    if (fetcher.state !== "idle") {
       setOpenOverlay(true);
-      setOpen(false);
     } else {
       setOpenOverlay(false);
     }
-  }, [isSearching, setOpenOverlay, setOpen]);
+    if (fetcher.type === "done") {
+      setOpen(false);
+    }
+  }, [fetcher, setOpenOverlay, setOpen]);
 
   return (
-    <Form method="post" className="flex justify-between md:w-[90%] relative">
+    <fetcher.Form
+      method="post"
+      className="flex justify-between md:w-[90%] relative"
+    >
       <input
         ref={inputRef}
         type="text"
@@ -40,7 +40,7 @@ const SearchForm = ({ setOpen, setOpenOverlay }) => {
           "focus:outline-none focus:ring-transparent  placeholder-teal-200"
         )}
       />
-    </Form>
+    </fetcher.Form>
   );
 };
 
