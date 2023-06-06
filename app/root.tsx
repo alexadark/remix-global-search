@@ -24,7 +24,8 @@ const isServer = typeof window === "undefined";
 //We need to check if we are on the server or client to get the correct env variable
 const accessToken = isServer
   ? process.env.STORYBLOK_PREVIEW_TOKEN
-  : window.env.STORYBLOK_PREVIEW_TOKEN;
+  : //@ts-ignore
+    window.env.STORYBLOK_PREVIEW_TOKEN;
 
 const components = {
   page: Page,
