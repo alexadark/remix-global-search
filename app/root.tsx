@@ -9,6 +9,8 @@ import {
   useLoaderData,
 } from "@remix-run/react";
 import { storyblokInit, apiPlugin } from "@storyblok/react";
+import type { V2_MetaFunction } from "@remix-run/node";
+import type { LoaderArgs } from "@remix-run/node";
 
 import Page from "./components/Page";
 
@@ -49,11 +51,27 @@ export const action = async ({ request }) => {
   return redirect(`/search-results?query=${body.get("query")}`);
 };
 
-export const meta = () => ({
-  charset: "utf-8",
-  title: "New Remix App",
-  viewport: "width=device-width,initial-scale=1",
-});
+// export const meta = () => ({
+//   charset: "utf-8",
+//   title: "New Remix App",
+//   viewport: "width=device-width,initial-scale=1",
+// });
+
+export const meta: V2_MetaFunction = () => {
+  return [
+    { charset: "utf-8" },
+    { title: "My Super New Blog | Remix" },
+    {
+      property: "og:title",
+      content: "Very cool blog",
+    },
+    {
+      name: "description",
+      content: "This blog is the best",
+    },
+    { viewport: "width=device-width,initial-scale=1" },
+  ];
+};
 
 export default function App() {
   const { env } = useLoaderData();

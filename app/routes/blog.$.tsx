@@ -5,8 +5,9 @@ import {
 } from "@storyblok/react";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
+import type { LoaderArgs } from "@remix-run/node";
 
-export const loader = async ({ params }) => {
+export const loader = async ({ params }: LoaderArgs) => {
   const slug = params["*"] ?? "home";
   const sbApi = getStoryblokApi();
   const { data } = await sbApi.get(`cdn/stories/blog/${slug}`, {
@@ -15,7 +16,7 @@ export const loader = async ({ params }) => {
   const { data: posts } = await sbApi.get(`cdn/stories`, {
     version: "draft",
     starts_with: "blog/",
-    is_startpage: false,
+    is_startpage: 0,
   });
   return json({ story: data?.story, posts: posts?.stories });
 };
@@ -23,7 +24,7 @@ export const loader = async ({ params }) => {
 const BlogRoute = () => {
   const data = useLoaderData();
   const story = useStoryblokState(data.story);
-  return <StoryblokComponent blok={story.content} />;
+  return <StoryblokComponent blok={story?.content} />;
 };
 
 export default BlogRoute;
