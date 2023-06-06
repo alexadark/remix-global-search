@@ -11,6 +11,7 @@ import {
 import { storyblokInit, apiPlugin } from "@storyblok/react";
 import type { V2_MetaFunction } from "@remix-run/node";
 import type { LoaderArgs } from "@remix-run/node";
+import type { ActionArgs } from "@remix-run/node";
 
 import Page from "./components/Page";
 
@@ -39,7 +40,7 @@ storyblokInit({
   components,
 });
 
-export const loader = async () => {
+export const loader = async (args: LoaderArgs) => {
   return json({
     env: {
       STORYBLOK_PREVIEW_TOKEN: process.env.STORYBLOK_PREVIEW_TOKEN,
@@ -47,16 +48,10 @@ export const loader = async () => {
   });
 };
 
-export const action = async ({ request }) => {
+export const action = async ({ request }: ActionArgs) => {
   const body = await request.formData();
   return redirect(`/search-results?query=${body.get("query")}`);
 };
-
-// export const meta = () => ({
-//   charset: "utf-8",
-//   title: "New Remix App",
-//   viewport: "width=device-width,initial-scale=1",
-// });
 
 export const meta: V2_MetaFunction = () => {
   return [
