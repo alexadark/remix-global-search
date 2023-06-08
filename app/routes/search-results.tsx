@@ -1,7 +1,9 @@
 import { useLoaderData, Link } from "@remix-run/react";
 import { getStoryblokApi } from "@storyblok/react";
+import type { LoaderArgs } from "@remix-run/node";
+import type { StoryblokStory } from "storyblok-generate-ts";
 
-export const loader = async ({ request }) => {
+export const loader = async ({ request }: LoaderArgs) => {
   const url = new URL(request.url);
   const search = new URLSearchParams(url.search);
   const query = search.get("query");
@@ -33,13 +35,17 @@ export const loader = async ({ request }) => {
 
 const SearchResults = () => {
   const { stories } = useLoaderData();
-  const pagesResults = stories.filter((s) => s.content.component === "page");
-  const postsResults = stories.filter((s) => s.content.component === "post");
+  const pagesResults = stories.filter(
+    (s: StoryblokStory<any>) => s.content.component === "page"
+  );
+  const postsResults = stories.filter(
+    (s: StoryblokStory<any>) => s.content.component === "post"
+  );
   if (stories.length === 0) return <h1>No results found</h1>;
   return (
     <>
       {pagesResults.length > 0 && <h2>Pages</h2>}
-      {pagesResults?.map((p) => {
+      {pagesResults?.map((p: StoryblokStory<any>) => {
         return (
           <h3 key={p.id}>
             <Link to={`/${p.full_slug}`}>{p.name}</Link>
@@ -48,7 +54,7 @@ const SearchResults = () => {
       })}
 
       {postsResults.length > 0 && <h2>Posts</h2>}
-      {postsResults?.map((p) => {
+      {postsResults?.map((p: StoryblokStory<any>) => {
         return (
           <h3 key={p.id}>
             <Link to={`/${p.full_slug}`}>{p.content.headline}</Link>
