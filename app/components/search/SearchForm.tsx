@@ -1,12 +1,21 @@
 import { useEffect, useRef } from "react";
+import type { Dispatch, SetStateAction, FC } from "react";
 import { useFetcher } from "@remix-run/react";
 import clsx from "clsx";
 
-const SearchForm = ({ setOpen, setOpenOverlay }) => {
-  let inputRef = useRef();
-  const fetcher = useFetcher();
+type SetStateBool = Dispatch<SetStateAction<boolean>>;
+
+interface SearchFormProps {
+  setOpen: SetStateBool;
+  setOpenOverlay: SetStateBool;
+}
+
+const SearchForm: FC<SearchFormProps> = ({ setOpen, setOpenOverlay }) => {
+  let inputRef = useRef<HTMLInputElement>(null);
+  const fetcher = useFetcher(); // You need to define the type for useFetcher and its return value
+
   useEffect(() => {
-    inputRef.current.focus();
+    inputRef.current?.focus();
   }, []);
 
   useEffect(() => {

@@ -1,7 +1,8 @@
 import { storyblokEditable } from "@storyblok/react";
 import { render } from "storyblok-rich-text-react-renderer";
+import type { PostStoryblok } from "~/types";
 
-const Post = ({ blok }) => {
+const Post = ({ blok }: PostStoryblok) => {
   const { headline, text, _uid, image } = blok;
   return (
     <article
