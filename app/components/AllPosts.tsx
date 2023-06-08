@@ -1,7 +1,8 @@
 import { storyblokEditable } from "@storyblok/react";
 import { useLoaderData, Link } from "@remix-run/react";
+import type { AllPostsStoryblok, PostStoryblok } from "~/types";
 
-const AllPosts = ({ blok }) => {
+const AllPosts = ({ blok }: AllPostsStoryblok) => {
   const { posts } = useLoaderData();
 
   return (
@@ -10,7 +11,7 @@ const AllPosts = ({ blok }) => {
         {blok.headline}
       </h1>
       <div className="container grid-cols-3 gap-5 px-6 mx-auto lg:grid">
-        {posts?.map((p) => {
+        {posts?.map((p: PostStoryblok) => {
           const post = p.content;
           return (
             <article key={post._uid}>

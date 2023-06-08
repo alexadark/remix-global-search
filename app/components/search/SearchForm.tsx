@@ -2,9 +2,9 @@ import { useEffect, useRef } from "react";
 import clsx from "clsx";
 import { Form } from "@remix-run/react";
 const SearchForm = () => {
-  let inputRef = useRef();
+  let inputRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
-    inputRef.current.focus();
+    inputRef.current?.focus();
   }, []);
 
   return (
