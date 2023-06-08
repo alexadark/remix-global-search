@@ -16,7 +16,7 @@ import Layout from "./components/Layout";
 import Post from "./components/Post";
 import AllPosts from "./components/AllPosts";
 import PageContent from "./components/PageContent";
-import styles from "./styles/app.css";
+import tailwind from "./styles/tailwind-build.css";
 const isServer = typeof window === "undefined";
 
 //We need to check if we are on the server or client to get the correct env variable
@@ -75,6 +75,6 @@ export default function App() {
   );
 }
 
-export function links() {
-  return [{ rel: "stylesheet", href: styles }];
-}
+export const links = () => {
+  return [{ rel: "stylesheet", href: tailwind }];
+};
