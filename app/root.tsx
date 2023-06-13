@@ -19,7 +19,7 @@ import Layout from "./components/Layout";
 import Post from "./components/Post";
 import AllPosts from "./components/AllPosts";
 import PageContent from "./components/PageContent";
-import tailwind from "./styles/tailwind-build.css";
+import tailwind from "./styles/tailwind.css";
 const isServer = typeof window === "undefined";
 
 //We need to check if we are on the server or client to get the correct env variable
