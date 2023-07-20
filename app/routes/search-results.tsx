@@ -5,8 +5,7 @@ import type { StoryblokStory } from "storyblok-generate-ts";
 
 export const loader = async ({ request }: LoaderArgs) => {
   const url = new URL(request.url);
-  const search = new URLSearchParams(url.search);
-  const query = search.get("query");
+  const query = url.searchParams.get("query");
   const filter_query = {
     __or: [
       {
