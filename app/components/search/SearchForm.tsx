@@ -41,7 +41,7 @@ const SearchForm: FC<SearchFormProps> = ({ setOpen, setOpenOverlay }) => {
         name="query"
         placeholder="Search..."
         className={clsx(
-          "w-full h-12",
+          "w-full h-12 px-5",
           "bg-teal-800",
           "border-0 border-l-8 border-teal-200 focus:border-teal-600",
           "text-teal-100",
