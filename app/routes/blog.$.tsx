@@ -5,9 +5,9 @@ import {
 } from "@storyblok/react";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import type { LoaderArgs } from "@remix-run/node";
+import type { LoaderArgs, LoaderFunction } from "@remix-run/node";
 
-export const loader = async ({ params }: LoaderArgs) => {
+export const loader: LoaderFunction = async ({ params }: LoaderArgs) => {
   const slug = params["*"] ?? "home";
   const sbApi = getStoryblokApi();
   const { data } = await sbApi.get(`cdn/stories/blog/${slug}`, {

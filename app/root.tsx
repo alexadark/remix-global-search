@@ -10,8 +10,12 @@ import {
 } from "@remix-run/react";
 import { storyblokInit, apiPlugin } from "@storyblok/react";
 import type { V2_MetaFunction } from "@remix-run/node";
-import type { LoaderArgs } from "@remix-run/node";
-import type { ActionArgs } from "@remix-run/node";
+import type {
+  ActionArgs,
+  ActionFunction,
+  LoaderArgs,
+  LoaderFunction,
+} from "@remix-run/node";
 
 import Page from "./components/Page";
 
@@ -40,7 +44,7 @@ storyblokInit({
   components,
 });
 
-export const loader = async (args: LoaderArgs) => {
+export const loader: LoaderFunction = async (args: LoaderArgs) => {
   return json({
     env: {
       STORYBLOK_PREVIEW_TOKEN: process.env.STORYBLOK_PREVIEW_TOKEN,
@@ -48,7 +52,7 @@ export const loader = async (args: LoaderArgs) => {
   });
 };
 
-export const action = async ({ request }: ActionArgs) => {
+export const action: ActionFunction = async ({ request }: ActionArgs) => {
   const body = await request.formData();
   return redirect(`/search-results?query=${body.get("query")}`);
 };

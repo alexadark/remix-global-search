@@ -1,9 +1,9 @@
 import { useLoaderData, Link } from "@remix-run/react";
 import { getStoryblokApi } from "@storyblok/react";
-import type { LoaderArgs } from "@remix-run/node";
+import type { LoaderArgs, LoaderFunction } from "@remix-run/node";
 import type { StoryblokStory } from "storyblok-generate-ts";
 
-export const loader = async ({ request }: LoaderArgs) => {
+export const loader: LoaderFunction = async ({ request }: LoaderArgs) => {
   const url = new URL(request.url);
   const query = url.searchParams.get("query");
   const filter_query = {
