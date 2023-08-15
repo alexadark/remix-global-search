@@ -13,6 +13,7 @@ interface SearchFormProps {
 const SearchForm: FC<SearchFormProps> = ({ setOpen, setOpenOverlay }) => {
   let inputRef = useRef<HTMLInputElement>(null);
   const fetcher = useFetcher(); // You need to define the type for useFetcher and its return value
+  console.log("fetcher", fetcher);
 
   useEffect(() => {
     inputRef.current?.focus();
@@ -24,7 +25,7 @@ const SearchForm: FC<SearchFormProps> = ({ setOpen, setOpenOverlay }) => {
     } else {
       setOpenOverlay(false);
     }
-    if (fetcher.type === "done") {
+    if (fetcher.formMethod === "POST") {
       setOpen(false);
     }
   }, [fetcher, setOpenOverlay, setOpen]);
