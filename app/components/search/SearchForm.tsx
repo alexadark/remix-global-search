@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import type { Dispatch, SetStateAction, FC } from "react";
-import { useFetcher } from "@remix-run/react";
+import { useFetcher, Form, useNavigation } from "@remix-run/react";
 import clsx from "clsx";
 
 type SetStateBool = Dispatch<SetStateAction<boolean>>;
@@ -12,7 +12,7 @@ interface SearchFormProps {
 
 const SearchForm: FC<SearchFormProps> = ({ setOpen, setOpenOverlay }) => {
   let inputRef = useRef<HTMLInputElement>(null);
-  const fetcher = useFetcher(); // You need to define the type for useFetcher and its return value
+  const fetcher = useNavigation(); // You need to define the type for useFetcher and its return value
   console.log("fetcher", fetcher);
 
   useEffect(() => {
@@ -31,10 +31,7 @@ const SearchForm: FC<SearchFormProps> = ({ setOpen, setOpenOverlay }) => {
   }, [fetcher, setOpenOverlay, setOpen]);
 
   return (
-    <fetcher.Form
-      method="post"
-      className="flex justify-between md:w-[90%] relative"
-    >
+    <Form method="post" className="flex justify-between md:w-[90%] relative">
       <input
         ref={inputRef}
         type="text"
@@ -50,7 +47,7 @@ const SearchForm: FC<SearchFormProps> = ({ setOpen, setOpenOverlay }) => {
           "focus:outline-none focus:ring-transparent  placeholder-teal-200"
         )}
       />
-    </fetcher.Form>
+    </Form>
   );
 };
 
