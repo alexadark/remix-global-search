@@ -25,7 +25,7 @@ const SearchForm: FC<SearchFormProps> = ({ setOpen, setOpenOverlay }) => {
     } else {
       setOpenOverlay(false);
     }
-    if (fetcher.formMethod === "POST") {
+    if (fetcher.state === "loading") {
       setOpen(false);
     }
   }, [fetcher, setOpenOverlay, setOpen]);
