@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import type { Dispatch, SetStateAction, FC } from "react";
-import { useFetcher, Form, useNavigation } from "@remix-run/react";
+import { Form, useNavigation } from "@remix-run/react";
 import clsx from "clsx";
 
 type SetStateBool = Dispatch<SetStateAction<boolean>>;
@@ -11,7 +11,7 @@ interface SearchFormProps {
 }
 
 const SearchForm: FC<SearchFormProps> = ({ setOpen, setOpenOverlay }) => {
-  let inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const fetcher = useNavigation(); // You need to define the type for useFetcher and its return value
   console.log("fetcher", fetcher);
 
@@ -20,7 +20,7 @@ const SearchForm: FC<SearchFormProps> = ({ setOpen, setOpenOverlay }) => {
   }, []);
 
   useEffect(() => {
-    if (fetcher.state !== "idle") {
+    if (fetcher.state === "submitting") {
       setOpenOverlay(true);
     } else {
       setOpenOverlay(false);
