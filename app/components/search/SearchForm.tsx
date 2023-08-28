@@ -1,37 +1,19 @@
 import { useEffect, useRef } from "react";
-import type { Dispatch, SetStateAction, FC } from "react";
-import { Form, useNavigation } from "@remix-run/react";
+import { Form } from "@remix-run/react";
 import clsx from "clsx";
 
-type SetStateBool = Dispatch<SetStateAction<boolean>>;
-
-interface SearchFormProps {
-  setOpen: SetStateBool;
-  setOpenOverlay: SetStateBool;
-}
-
-const SearchForm: FC<SearchFormProps> = ({ setOpen, setOpenOverlay }) => {
+const SearchForm = () => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const fetcher = useNavigation(); // You need to define the type for useFetcher and its return value
-  console.log("fetcher", fetcher);
 
   useEffect(() => {
     inputRef.current?.focus();
   }, []);
 
-  useEffect(() => {
-    if (fetcher.state === "submitting") {
-      setOpenOverlay(true);
-    } else {
-      setOpenOverlay(false);
-    }
-    if (fetcher.state === "loading") {
-      setOpen(false);
-    }
-  }, [fetcher, setOpenOverlay, setOpen]);
-
   return (
-    <Form method="post" className="flex justify-between md:w-[90%] relative">
+    <Form
+      action="search-results"
+      className="flex justify-between md:w-[90%] relative"
+    >
       <input
         ref={inputRef}
         type="text"

@@ -1,17 +1,28 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { HiOutlineSearch as SearchIcon } from "react-icons/hi";
 import { MdClose as Close } from "react-icons/md";
+import { useNavigation } from "@remix-run/react";
+
 import SearchForm from "./SearchForm";
 import clsx from "clsx";
 
 const Search = () => {
   const [open, setOpen] = useState(false);
-  const [openOverlay, setOpenOverlay] = useState(false);
 
+  const navigation = useNavigation();
+  const isSearching =
+    navigation.state !== "idle" &&
+    navigation.location.pathname === "/search-results";
+
+  useEffect(() => {
+    if (isSearching) {
+      setOpen(false);
+    }
+  }, [isSearching]);
   return (
     <>
-      {openOverlay && (
+      {isSearching && (
         <div className="absolute inset-0 flex items-center justify-center w-full h-full bg-green-900 overlay opacity-80">
           <h3>Searching...</h3>
         </div>
@@ -81,11 +92,7 @@ const Search = () => {
                     />
                   </button>
                   <div>
-                    <SearchForm
-                      setOpen={setOpen}
-                      openOverlay={openOverlay}
-                      setOpenOverlay={setOpenOverlay}
-                    />
+                    <SearchForm />
                   </div>
                 </div>
               </Transition.Child>

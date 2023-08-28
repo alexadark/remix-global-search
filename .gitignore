@@ -12,3 +12,5 @@ node_modules
 localhost.pem
 localhost-key.pem
 app/styles/tailwind-build.css
+metafile.js.json
+metafile.server.json
