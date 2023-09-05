@@ -1,4 +1,4 @@
-import { json, redirect } from "@remix-run/node";
+import { json } from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -9,10 +9,8 @@ import {
   useLoaderData,
 } from "@remix-run/react";
 import { storyblokInit, apiPlugin } from "@storyblok/react";
-import type { V2_MetaFunction } from "@remix-run/node";
 import type {
-  ActionArgs,
-  ActionFunction,
+  V2_MetaFunction,
   LoaderArgs,
   LoaderFunction,
 } from "@remix-run/node";
